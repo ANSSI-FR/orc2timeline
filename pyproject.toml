@@ -1,0 +1,334 @@
+# ----------------------------------------------------------------------
+# Packaging
+# https://packaging.python.org/en/latest/tutorials/packaging-projects
+# ----------------------------------------------------------------------
+
+[build-system]
+requires = ["setuptools>=67.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "orc2timeline"
+description = "Generate a timeline from list of Orc files"
+authors = [
+  {name = "Berenger Foucher", email = "berenger.foucher@ssi.gouv.fr" }
+]
+maintainers = [
+  {name = "Berenger Foucher", email = "berenger.foucher@ssi.gouv.fr" }
+]
+dependencies = [
+  "click>=8.1.0",
+  "dateparser==1.2.0",
+  "py7zr==0.21.0",
+  "libevtx-python==20240204",
+  "libesedb-python==20240420",
+  "dfwinreg==20240229",
+  "six==1.16.0",
+  "pytz==2024.1",
+]
+
+readme = "README.rst"
+requires-python = ">=3.8"
+keywords = ["python"]
+license = {file = "LICENSE"}
+
+# See https://pypi.org/classifiers/
+classifiers = [
+
+  #"Development Status :: 1 - Planning",
+  #"Development Status :: 2 - Pre-Alpha",
+  "Development Status :: 3 - Alpha",
+  #"Development Status :: 4 - Beta",
+  #"Development Status :: 5 - Production/Stable",
+  #"Development Status :: 6 - Mature",
+  #"Development Status :: 7 - Inactive",
+
+  # Default usage
+  "Environment :: Console",
+
+  # Framework used
+  "Framework :: Pytest",
+  "Framework :: Sphinx",
+  "Framework :: tox",
+
+  # Indicate who your project is intended for
+  "Intended Audience :: Developers",
+  "Intended Audience :: System Administrators",
+
+  # Target OS
+  "Operating System :: OS Independent",
+
+  # Version available for this project
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3 :: Only",
+
+  # What is the language used in the project
+  "Natural Language :: English",
+
+  "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+
+  # The project is typed
+  "Typing :: Typed"
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/ANSSI-FR/orc2timeline"
+Issues = "https://github.com/ANSSI-FR/orc2timeline/issues"
+Documentation = "https://github.com/ANSSI-FR/DECODE/tree/main/docs"
+Source = "https://github.com/ANSSI-FR/orc2timeline"
+
+[project.scripts]
+orc2timeline = "orc2timeline.cli:entrypoint"
+
+[project.optional-dependencies]
+tests = [
+  "pytest>=7.3.0",
+  "pytest-mock>=3.10.0",
+]
+cov = [
+  "orc2timeline[tests]",
+  "coverage[toml]>=6.5.0",
+  "pytest-cov>=4.0.0",
+]
+lint = [
+  "orc2timeline[tests]",
+  "mypy>=1.2.0",
+  "black>=23.0.0",
+  "ruff>=v0.0.275",
+  "types-setuptools>=57.0",
+]
+tox = [
+  "tox>=4.0.0",
+]
+build = [
+  "build>=0.10.0",
+]
+deploy = [
+  "twine>=4.0.0",
+]
+dev = [
+  "orc2timeline[tests,cov,lint,tox,build,deploy]",
+]
+# For add optional dependencies, uncomment the next section
+#[project.optional-dependencies]
+
+
+# ----------------------------------------------------------------------
+# Setuptools
+# https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
+# ----------------------------------------------------------------------
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {attr = "orc2timeline.info.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+orc2timeline = ["plugins/**/*.txt", "conf/*.yaml"]
+
+# ----------------------------------------------------------------------
+# Tox
+# https://pypi.org/project/tox
+# ----------------------------------------------------------------------
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+min_version = 4.0
+envlist = lint,tests
+
+[testenv]
+deps = .[tests]
+commands =
+  pytest
+
+[testenv:lint]
+deps = .[lint]
+commands =
+  ruff check .
+  black --diff .
+  mypy .
+
+[testenv:format]
+deps = .[lint]
+commands =
+  black .
+  ruff check --fix .
+
+[testenv:cov]
+deps = .[cov]
+commands =
+	pytest -s --cov {envsitepackagesdir}/orc2timeline --cov-report html --cov-report term --cov-append
+"""
+
+
+# ----------------------------------------------------------------------
+# Pytest
+# https://docs.pytest.org/en/7.3.x/
+# ----------------------------------------------------------------------
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "DEBUG"
+#asyncio_mode = "auto"
+
+
+# ----------------------------------------------------------------------
+# Black
+# https://pypi.org/project/black
+# ----------------------------------------------------------------------
+
+[tool.black]
+line-length = 120
+target-version  = ["py38", "py39", "py310", "py311"]
+
+# Enable linting on pyi files
+include = "\\.pyi?$"
+
+
+# ----------------------------------------------------------------------
+# Mypy
+# https://pypi.org/project/mypy
+# ----------------------------------------------------------------------
+
+[tool.mypy]
+python_version = 3.8
+exclude = [
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".hg",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".pytype",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "build",
+  "dist",
+  "node_modules",
+  "venv",
+]
+enable_error_code = ["ignore-without-code", "truthy-bool", "redundant-expr"]
+
+# Disallow dynamic typing
+disallow_any_unimported = false
+disallow_any_expr = false  # All attribut of argparse.Namespace are Any
+disallow_any_decorated = false  # Too many package doesn't have typed decorator
+disallow_any_generics = true
+disallow_subclassing_any = true
+
+# Disallow untyped definitions and calls
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = false  # Too many decorator are untyped
+
+# None and optional handling
+no_implicit_optional = true
+
+# Configuring warnings
+warn_unused_ignores = true
+warn_no_return = true
+warn_return_any = true
+warn_redundant_casts = true
+
+# Misc things
+strict_equality = true
+
+# Config file
+warn_unused_configs = true
+
+# Exemple for missing types
+[[tool.mypy.overrides]]
+module = ["py7zr", "dfwinreg", "pyevtx", "pytz", "pyesedb", "dateparser", "yaml"]
+ignore_missing_imports = true
+
+# ----------------------------------------------------------------------
+# Ruff
+# https://pypi.org/project/ruff
+# ----------------------------------------------------------------------
+
+[tool.ruff]
+exclude = [
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".hg",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".pytype",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "build",
+  "dist",
+  "node_modules",
+  "venv",
+]
+line-length = 120
+target-version = "py38"
+
+[tool.ruff.lint]
+select = ["ALL"]
+# D203 and D211 are incompatible
+# D212 and D213 are incompatible
+# D400 [*] First line should end with a period
+# D101 Missing docstring in public class
+# ANN101 Missing type annotation for `self` in method
+ignore = ["D203", "D213", "D400", "D101", "ANN101", "PERF203", "N999"]
+fixable = ["ALL"]
+unfixable = []
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+isort.known-first-party = ["orc2timeline"]
+mccabe.max-complexity = 12
+
+[tool.ruff.lint.per-file-ignores]
+# E402 Module level import not at top of file
+# INP001 File `docs\conf.py` is part of an implicit namespace package. Add an `__init__.py`.
+# A001 Variable `copyright` is shadowing a python builtin
+# PTH100 `os.path.abspath()` should be replaced by `Path.resolve()`
+"docs/conf.py" = ["E402", "INP001", "A001", "PTH100"]
+# S101 Use of `assert` detected
+# S603 `subprocess` call: check for execution of untrusted input
+"tests/*.py" = ["S101", "S603"]
+# Q003 [*] Change outer quotes to avoid escaping inner quotes
+# E501 Line too long
+"*/info.py" = ["Q003", "E501"]
+# E501 Line too long
+"*/__main__.py" = ["E501"]
+
+# ----------------------------------------------------------------------
+# Pylint
+# https://pylint.pycqa.org/en/latest/index.html
+# ----------------------------------------------------------------------
+
+# We dont use pylint, so we disabled it
+[tool.pylint.main]
+ignore-patterns = ["*"]
+
+[tool.ruff.lint.pylint]
+max-args = 7

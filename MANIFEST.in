@@ -1,0 +1,12 @@
+include .editorconfig
+include .gitignore
+include LICENSE
+include Makefile
+include MANIFEST.in
+include pyproject.toml
+include README.rst
+include src/orc2timeline/py.typed
+recursive-include tests *
+recursive-include docs *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

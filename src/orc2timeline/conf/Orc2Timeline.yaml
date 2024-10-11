@@ -1,0 +1,30 @@
+Plugins:
+  - RegistryToTimeline:
+      archives: ["SAM", "Little", "Detail", "Offline"]
+      sub_archives: ["SAM.7z", "SystemHives_little.7z", "UserHives.7z", "SystemHives.7z"]
+      match_pattern: ".*data$"
+      sourcetype: "Registry"
+
+  - EventLogsToTimeline:
+      archives: ["General", "Little", "Offline"]
+      sub_archives: ["Event.7z"]
+      match_pattern: ".*evtx.*data$"
+      sourcetype: "Event"
+
+  - NTFSInfoToTimeline:
+      archives: ["Detail", "General", "Little", "Offline"]
+      sub_archives: ["NTFSInfo_detail.7z", "NTFSInfo_quick.7z"]
+      match_pattern: "^.*NTFSInfo[^/]*\\.csv$"
+      sourcetype: "MFT"
+ 
+  - USNInfoToTimeline:
+      archives: ["Detail", "Little", "Offline"]
+      sub_archives: ["USNInfo.7z"]
+      match_pattern: "^USNInfo.*\\.csv$"
+      sourcetype: "USN journal"
+ 
+  - I30InfoToTimeline:
+      archives: ["Detail", "Offline"]
+      sub_archives: ["NTFSInfo_i30Info.7z"]
+      match_pattern: "^I30Info.*\\.csv$"
+      sourcetype: "I30"

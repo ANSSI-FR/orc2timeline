@@ -1,0 +1,3 @@
+Microsoft-Windows-Security-Auditing/4624:[Logon]
+Microsoft-Windows-Security-Auditing/4625:[Failed Login]
+Microsoft-Windows-Security-Auditing/1102:[Log Cleared]

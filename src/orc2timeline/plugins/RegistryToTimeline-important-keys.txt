@@ -1,0 +1,58 @@
+HKEY_CURRENT_USER\Environment
+HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\RunEx
+HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceEx
+HKEY_CURRENT_USER\Software\Microsoft\HtmlHelp Author
+HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Windows
+HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon
+HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Error Reporting\Hangs
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunEx
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceEx
+HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Lsa
+HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\Control\Lsa
+HKEY_LOCAL_MACHINE\SYSTEM\ControlSet003\Control\Lsa
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
+HKEY_LOCAL_MACHINE\Software\Classes\CLSID\{52A2AAAE-085D-4187-97EA-8C30DB990436}\InprocServer32
+HKEY_LOCAL_MACHINE\Software\Classes\Wow6432Node\CLSID\{52A2AAAE-085D-4187-97EA-8C30DB990436}\InprocServer32
+HKEY_LOCAL_MACHINE\Software\Microsoft\Command Processor
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\AeDebug
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Windows
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Userinit
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\Windows Error Reporting\Hangs
+HKEY_LOCAL_MACHINE\Software\WOW6432Node\Microsoft\Windows NT\CurrentVersion\AeDebug
+HKEY_LOCAL_MACHINE\Software\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Winlogon
+HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Command Processor
+HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Windows
+HKEY_LOCAL_MACHINE\System\ControlSet001\Control\ContentIndex\Language
+HKEY_LOCAL_MACHINE\System\ControlSet001\Control\LsaExtensionConfig\LsaSrv
+HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Terminal Server\WinStations\RDP-Tcp
+HKEY_LOCAL_MACHINE\System\ControlSet001\Services\DNS\Parameters
+HKEY_LOCAL_MACHINE\System\ControlSet002\Control\ContentIndex\Language
+HKEY_LOCAL_MACHINE\System\ControlSet002\Control\LsaExtensionConfig\LsaSrv
+HKEY_LOCAL_MACHINE\System\ControlSet002\Control\Terminal Server\WinStations\RDP-Tcp
+HKEY_LOCAL_MACHINE\System\ControlSet002\Services\DNS\Parameters
+HKEY_LOCAL_MACHINE\System\ControlSet003\Control\ContentIndex\Language
+HKEY_LOCAL_MACHINE\System\ControlSet003\Control\LsaExtensionConfig\LsaSrv
+HKEY_LOCAL_MACHINE\System\ControlSet003\Control\Terminal Server\WinStations\RDP-Tcp
+HKEY_LOCAL_MACHINE\System\ControlSet003\Services\DNS\Parameters
+HKEY_LOCAL_MACHINE\System\ControlSet001\Control\LsaExtensionConfig\LsaSrv
+HKEY_LOCAL_MACHINE\System\ControlSet002\Control\LsaExtensionConfig\LsaSrv
+HKEY_LOCAL_MACHINE\System\ControlSet003\Control\LsaExtensionConfig\LsaSrv
+HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\LsaExtensionConfig\LsaSrv
+HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Session Manager\AppCertDlls
+HKEY_LOCAL_MACHINE\System\ControlSet002\Control\Session Manager\AppCertDlls
+HKEY_LOCAL_MACHINE\System\ControlSet003\Control\Session Manager\AppCertDlls
+HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\AppCertDlls
+HKEY_LOCAL_MACHINE\System\ControlSet001\Services\DNS\Parameters
+HKEY_LOCAL_MACHINE\System\ControlSet002\Services\DNS\Parameters
+HKEY_LOCAL_MACHINE\System\ControlSet003\Services\DNS\Parameters
+HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\DNS\Parameters
+\Environment
+\Software\Microsoft\Command Processor

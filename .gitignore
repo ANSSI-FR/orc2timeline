@@ -1,0 +1,42 @@
+# cached files
+__pycache__/
+*.py[cod]
+.cache
+
+# installation package
+*.egg-info/
+dist/
+build/
+
+# environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# pycharm
+.idea/
+
+# vscode
+.vscode/
+*.code-workspace
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+mypy.ini
+
+# test caches
+.tox/
+.pytest_cache/
+.coverage
+htmlcov
+report.xml
+coverage.xml
+
+# Docs
+public/
