@@ -41,7 +41,12 @@ def _map_open(input_file: Path) -> TextIO:
 def _merge_sorted_files(paths: list[Path], output_path: str, temp_dir: str) -> int:
     """Merge sorted files contained in paths list to output_path file and return number of unique lines."""
     events_count = 0
-    intermediate_file = tempfile.NamedTemporaryFile(dir=temp_dir, encoding="utf-8", mode="w+", delete=False)
+    intermediate_file = tempfile.NamedTemporaryFile(  # noqa: SIM115
+        dir=temp_dir,
+        encoding="utf-8",
+        mode="w+",
+        delete=False,
+    )
     old_intermediate_file_name = ""
     while len(paths) != 0:
         sub_paths = []
@@ -64,7 +69,12 @@ def _merge_sorted_files(paths: list[Path], output_path: str, temp_dir: str) -> i
         intermediate_file.close()
         for f in files:
             f.close()
-        intermediate_file = tempfile.NamedTemporaryFile(dir=temp_dir, encoding="utf-8", mode="w+", delete=False)
+        intermediate_file = tempfile.NamedTemporaryFile(  # noqa: SIM115
+            dir=temp_dir,
+            encoding="utf-8",
+            mode="w+",
+            delete=False,
+        )
 
     _add_header_to_csv_file(output_path)
     with Path(old_intermediate_file_name).open(encoding="utf-8") as infile, gzip.open(
@@ -73,7 +83,7 @@ def _merge_sorted_files(paths: list[Path], output_path: str, temp_dir: str) -> i
         encoding="utf-8",
         newline="",
     ) as outfile:
-        shutil.copyfileobj(infile, outfile)
+        shutil.copyfileobj(infile, outfile)  # type: ignore[misc]
 
     return events_count
 
