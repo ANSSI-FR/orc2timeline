@@ -1,6 +1,6 @@
 # orc2timeline
 
-**orc2timeline** stands for "ORC to timeline", ORC refers to DFIR-ORC which is a tool used to parse and collect critical **artefacts of a Windows system** during an **incident response**.
+**orc2timeline** stands for "ORC to timeline", ORC refers to [DFIR-ORC](https://github.com/DFIR-ORC/dfir-orc) which is a tool used to parse and collect critical **artefacts of a Windows system** during an **incident response**.
 
 orc2timeline can take one or several ORC as input and **generate one timeline per host**.
 
@@ -34,7 +34,7 @@ $ tree ~
 
 Process all the ORC contained in a directory (orc2timeline will infer hostname from file names and group files by host to process them):
 ```
-$ orc2timeline --tmp-dir=/tmp/data process_dir -j 4  ~/Documents/ORC ~/Documents/output_directory
+$ orc2timeline --tmp-dir=/tmp process_dir -j 4  ~/Documents/ORC ~/Documents/output_directory
 ```
 
 This command will create the following files:
