@@ -9,14 +9,14 @@ from orc2timeline import process
 
 def _zcat_and_sha1(file: str) -> str:
     buf_size = 65536
-    fd = gzip.open(file, "rb")
-    my_sha1 = hashlib.sha1()  # noqa: S324
-    while True:
-        data = fd.read(buf_size)
-        if not data:
-            break
-        my_sha1.update(data)
-    fd.close()
+    with gzip.open(file, "rb") as fd:
+        my_sha1 = hashlib.sha1()  # noqa: S324
+        while True:
+            data = fd.read(buf_size)
+            if not data:
+                break
+            my_sha1.update(data)
+
     return str(my_sha1.hexdigest())
 
 
