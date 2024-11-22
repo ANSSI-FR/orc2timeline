@@ -2,9 +2,9 @@
 
 ### Introduction
 
-Depending on the **Orc configuration** you use, you may have to **customize the configuration**. The given configuration works with the configuration of DFIR-ORC that is published on [github](https://github.com/DFIR-ORC/dfir-orc-config).
+Depending on the **Orc configuration** you use, you may have to **customize the configuration**. The given configuration works with the configuration of DFIR-ORC that is published on [GitHub](https://github.com/DFIR-ORC/dfir-orc-config).
 
-The configuration file is a **yaml file** that is read every time orctimeline is run during the preliminary phase of the execution. The file can be modified, but **must stay inplace**. To know the path where to find this file the following command can be used : `orc2timeline show_conf_file`. To validate the modifications, `orc2timeline show_conf` command can be used to view the configuration that will be used.
+The configuration file is a **yaml file** that is read every time orc2timeline is run during the preliminary phase of the execution. The file can be modified, but **must stay inplace**. To know the path where to find this file the following command can be used : `orc2timeline show_conf_file`. To validate the modifications, `orc2timeline show_conf` command can be used to view the configuration that will be used.
 
 ### Explanations
 
@@ -29,7 +29,7 @@ The plugin has **four attributes**:
   - `match_pattern`: regex pattern used to filter which files must be processed;
   - `sourcetype`: string that will be used for the column SourceType for this plugin.
 
-All the combinations between `archives` and `sub_archives` will be used to create plugin instances. With the previous example, the following intances will be creates:
+All the combinations between `archives` and `sub_archives` will be used to create plugin instances. With the previous example, the following instances will be created:
   - `EventLogsToTimeline(archives="General", sub_archives="Event.7z", ...)`;
   - `EventLogsToTimeline(archives="General", sub_archives="Event_Little.7z", ...)`;
   - `EventLogsToTimeline(archives="Little", sub_archives="Event.7z", ...)`;
@@ -51,7 +51,7 @@ DFIR-ORC_Server_MACHINENAME_Little.7z
     └── file4.evt
 ```
 
-The files `file1.evtx`, `file2.evtx`, `file3.evtx` will be processed. `file4.evt` will not be processed because it does not match the `match_pattern`, `file5.evtx` will not be processed because `Other.7z` it not mentionned in the `sub_archives` list.
+The files `file1.evtx`, `file2.evtx`, `file3.evtx` will be processed. `file4.evt` will not be processed because it does not match the `match_pattern`, `file5.evtx` will not be processed because `Other.7z` is not mentioned in the `sub_archives` list.
 
 The **same plugin can be described many times** in the configuration file. The following snippet or configuration is equivalent to the previous one:
 ```
@@ -72,7 +72,7 @@ Plugins:
 [...]
 ```
 
-**Warning !** The following snipper is **NOT** equivalent to the first one:
+**Warning !** The following snippet is **NOT** equivalent to the first one:
 ```
 Plugins:
   - EventLogsToTimeline:
