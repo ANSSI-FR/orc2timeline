@@ -4,7 +4,7 @@
 
 orc2timeline is written in **python (version 3)**. Since the goal of this tool is **to rely on external dependencies** to parse artefacts, it seemed relevant to choose a **widely adopted language** to take advantage of the **large amount of libraries** available.
 
-Moreover considering the adoption of python it seems perfect to **ease maintenance and evolutions** of the project.
+Moreover, considering the adoption of python it seems perfect to **ease maintenance and evolutions** of the project.
 
 ## Plugin
 

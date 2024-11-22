@@ -1,6 +1,6 @@
 # Develop your own plugin
 
-orc2timeline works with plugins in order to ease features integration. Therefore adding the parsing of an artefact can be done by modifying only two files. First the plugin file must be created, then the plugin configuration must be appended to the configuration file.
+orc2timeline works with plugins in order to ease features integration. Therefore, adding the parsing of an artefact can be done by modifying only two files. First the plugin file must be created, then the plugin configuration must be appended to the configuration file.
 
 ## MyPlugin.py
 
@@ -16,7 +16,7 @@ In the following example, we assume that we have a very convenient library named
 
 ### GenericToTimeline
 
-This file, is a python module that can contain mutiple classes. This module **must contain a class that is named after the file name**, this class **must inherit** from `GenericToTimeline`.
+This file, is a python module that can contain multiple classes. This module **must contain a class that is named after the file name**, this class **must inherit** from `GenericToTimeline`.
 
 `GenericToTimeline` is a module that contains two classes:
   - `Event` (describes an event that represents one line in the final timeline);
@@ -64,7 +64,7 @@ One function of your class that is **absolutely mandatory to override** is `_par
 
 Another function that **must** be called is `_add_event`, it take an Event as argument, and **adds it to the final timeline**.
 
-Based on the configuration, the artefact files will be extracted accordingly to GenericToTimeline's mecanisms. These files will then be passed one by one as argument to the function `_parse_artefact`.
+Based on the configuration, the artefact files will be extracted accordingly to GenericToTimeline's mechanisms. These files will then be passed one by one as argument to the function `_parse_artefact`.
 
 `self._get_original_path` can be used to retrieve the path of the artefact as it was on the original filesystem. If an error occurs, this function returns the path inside the archive instead.
 
@@ -90,7 +90,7 @@ In your plugin class (LNKToTimeline in our example), it is possible to add an op
 
 If the file header matches the byte array, it will be processed, otherwise the file will be ignored.
 
-For our example, LNK files begin with the length of the header (0x4c) followed by the GUID {00021401-0000-0000-c000-000000000046}. Therefore the header of the LNK files is `4c00 0000 0114 0200 0000 0000 c000 0000 0000 0046`.
+For our example, LNK files begin with the length of the header (0x4c) followed by the GUID {00021401-0000-0000-c000-000000000046}. Therefore, the header of the LNK files is `4c00 0000 0114 0200 0000 0000 c000 0000 0000 0046`.
 
 Example:
 ```

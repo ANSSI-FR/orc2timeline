@@ -4,7 +4,7 @@
 
 Yes ! Parsing a large amount of data takes time.
 
-Processing an Offline ORC of 1,7G on a laptop with i5 CPU (1.60GHz) with a single thread takes 12 minutes. When using 4 threads on the same laptop, it takes less that 8 minutes.
+Processing an Offline ORC of 1,7G on a laptop with i5 CPU (1.60GHz) with a single thread takes 12 minutes. When using 4 threads on the same laptop, it takes less than 8 minutes.
 
 Processing an ORC of 500M can take 20 minutes when using 4 threads.
 
@@ -14,7 +14,7 @@ The processing can be divided in two parts. The first part is plugin execution, 
 
 If a plugin instance takes significantly longer, it will have an impact on orc2timeline execution time.
 
-Nevertheless it is worth mentioning that the more ORC are processed in parallel, the more effective orc2timeline will be.
+Nevertheless, it is worth mentioning that the more ORC are processed in parallel, the more effective orc2timeline will be.
 
 Do not hesitate to run orc2timeline against a directory with a large number of ORC in it.
 
