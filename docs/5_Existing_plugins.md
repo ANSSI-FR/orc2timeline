@@ -14,7 +14,7 @@ These plugins are meant to process files that are **generated during DFIR-ORC ex
 
 This plugin processes files located in:
   - the `Little` archive, inside `NTFSInfo_detail.7z`;
-  - the `General` archive, indide `NTFSInfo_quick.7z`;
+  - the `General` archive, inside `NTFSInfo_quick.7z`;
   - the `Detail` archive, inside `NTFSInfo_detail.7z`;
   - the `Offline` archive, inside `NTFSInfo_detail.7z`.
 
@@ -33,7 +33,7 @@ Configuration snippet:
 
 For each entry in this csv file, one event is created per file and per different timestamp. This means that events with the same file\_path and timestamp will be grouped in a single event.
 
-Ouput example:
+Output example:
 ```
 2021-01-05 10:35:26.012,FAKEMACHINE,MFT,$SI: .A.B - $FN: MACB - Name: \Windows\System32\winevt\Logs\Microsoft-Windows-Bits-Client%4Operational.evtx - Size in bytes: 69632,NTFSInfo_00000000_DiskInterface_0xc87c5cca7c5cb542_.csv
 2021-01-05 10:35:26.996,FAKEMACHINE,MFT,$SI: .A.B - $FN: MACB - Name: \Windows\System32\winevt\Logs\Microsoft-Windows-Diagnosis-DPS%4Operational.evtx - Size in bytes: 69632,NTFSInfo_00000000_DiskInterface_0xc87c5cca7c5cb542_.csv
@@ -62,7 +62,7 @@ Configuration snippet:
 
 For each entry in this csv file, one event is created per file and per different timestamp. This means that events with the same file\_path and timestamp will be grouped in a single event.
 
-Ouput example:
+Output example:
 ```
 2009-07-14 03:20:08.961,FAKEMACHINE,I30,Entry in slackspace - $FN: ...B - Name: Windows - MFT segment num: 379 - Parent FRN: 0x0005000000000005 ,I30Info_00000000_DiskInterface_0xc87c5cca7c5cb542_.csv
 2021-01-05 19:24:19.796,FAKEMACHINE,I30,Entry in slackspace - $FN: MACB - Name: WinPEpge.sys - MFT segment num: 54 - Parent FRN: 0x0005000000000005 ,I30Info_00000000_DiskInterface_0xc87c5cca7c5cb542_.csv
@@ -101,9 +101,9 @@ Output example:
 
 ## Windows-artefact plugins
 
-DFIR-ORC collects files that may help DFIR analysis. Extracting the relevant pieces of data out of those files can be tricky since they are not meant to be parsed, and can be in proprietary format. orc2timeline **relies on opensource parsers**, the choice was made not to redevelop all the parsers and **take advantage of exiting librairies**.
+DFIR-ORC collects files that may help DFIR analysis. Extracting the relevant pieces of data out of those files can be tricky since they are not meant to be parsed, and can be in proprietary format. orc2timeline **relies on opensource parsers**, the choice was made not to redevelop all the parsers and **take advantage of existing libraries**.
 
-The plugins to parse Registry Hives and Event Logs are released. Many more could be developed for processing other types of artefacts such as LNK files, Jumplists... Developing theses plugins is left as an exercise to the reader (contibutions are welcome).
+The plugins to parse Registry Hives and Event Logs are released. Many more could be developed for processing other types of artefacts such as LNK files, Jumplists... Developing these plugins is left as an exercise to the reader (contributions are welcome).
 
 
 ### RegistryToTimeline plugin
@@ -112,9 +112,9 @@ This plugin processes registry hives, it creates one event per registry key, the
 
 The file named `RegistryToTimeline-important-keys.txt` allows to specify keys for which an event will be printed in the final timeline for each key value. The **key path must be exact**, regex are not supported.
 
-For more sophisticated treatements on key paths or key values, a new plugin must be developed. This new plugin could inherit `RegistryToTimeline` to benefit from existing functions.
+For more sophisticated treatments on key paths or key values, a new plugin must be developed. This new plugin could inherit `RegistryToTimeline` to benefit from existing functions.
 
-This plugins processes files located in:
+This plugin processes files located in:
   - the `Little` archive, inside `SystemHives_little.7z`;
   - the `Detail` archive, inside `SystemHives.7z` and `UserHives.7z`;
   - the `SAM` archive, inside `SAM.7z`;
