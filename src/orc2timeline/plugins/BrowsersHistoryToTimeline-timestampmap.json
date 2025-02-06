@@ -1,0 +1,11 @@
+{
+    "moz_bookmarks": "lastModified",
+    "moz_bookmarks_deleted": "dateRemoved",
+    "moz_historyvisits": "visit_date",
+    "moz_items_annos": "lastModified",
+    "moz_places": "last_visit_date",
+    "moz_places_metadatas": "updated_at",
+    "downloads": "end_time",
+    "urls": "last_visit_time",
+    "visits": "visit_time"
+}

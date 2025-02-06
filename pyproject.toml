@@ -25,6 +25,8 @@ dependencies = [
   "dfwinreg==20240229",
   "six==1.16.0",
   "pytz==2024.1",
+  "json>=2.0.9",
+  "sqlite3>=3.40.1"
 ]
 
 readme = "README.rst"
@@ -134,7 +136,7 @@ version = {attr = "orc2timeline.info.__version__"}
 where = ["src"]
 
 [tool.setuptools.package-data]
-orc2timeline = ["plugins/**/*.txt", "conf/*.yaml"]
+orc2timeline = ["plugins/**/*.txt", "plugins/**/*.json", "conf/*.yaml"]
 
 # ----------------------------------------------------------------------
 # Tox

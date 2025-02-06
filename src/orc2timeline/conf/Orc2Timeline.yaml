@@ -28,3 +28,9 @@ Plugins:
       sub_archives: ["NTFSInfo_i30Info.7z"]
       match_pattern: "^I30Info.*\\.csv$"
       sourcetype: "I30"
+
+  - BrowsersHistoryToTimeline:
+      archives: ["Browsers"]
+      sub_archives: ["Browsers_history.7z"]
+      match_pattern: [".*data$"]
+      sourcetype: ["Browsers history"]

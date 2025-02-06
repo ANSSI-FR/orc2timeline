@@ -169,3 +169,51 @@ Output example:
 2021-02-12 15:56:32.512,FAKEMACHINE,Event,Microsoft-Windows-Servicing:4 S-1-5-18 (KBWUClient-SelfUpdate-Aux Installed 0x0 WindowsUpdateAgent),\Windows\System32\winevt\Logs\Setup.evtx
 2022-10-24 01:46:29.681,FAKEMACHINE,Event,Microsoft-Windows-Servicing:2 S-1-5-18 (KBWUClient-SelfUpdate-Aux Installed 0x0 WindowsUpdateAgent),\Windows\System32\winevt\Logs\Setup.evtx
 ```
+
+### BrowsersHistoryToTimeline
+
+This plugin processes Browsers History files. It only supports SQLite database file. The plugin will automatically try to replay transactions files (contained in WAL file).
+
+Configuration snippet:
+
+```
+[...]
+  - BrowsersHistoryToTimeline:
+      archives: ["Browsers"]
+      sub_archives: ["Browsers_history.7z"]
+      match_pattern: [".*data$"]
+      sourcetype: ["Browsers history"]
+[...]
+```
+
+Output example:
+
+```
+021-02-12 15:56:30.372,FAKEMACHINE,Browsers history,TableName: moz_places - id: 1 - url: https://support.mozilla.org/products/firefox - title: None - rev_host: gro.allizom.troppus. - visit_count: 0 - hidden: 0 - typed: 0 - frecency: 137 - last_visit_date: None - guid: K-wMZzv_brcm - foreign_count: 1 - url_hash: 47358327123126 - description: None - preview_image_url: None - site_name: None - origin_id: 1 - recalc_frecency: 0 - alt_frecency: None - recalc_alt_frecency: 1 - ,<guid>_3_History_{00...00}.data
+```
+
+Additionnal configuration:
+
+Like `EventLogsToTimeline` plugin, a configuration file is available: `BrowsersHistoryToTimeline-timestampmap.json`. This file contains configuration about which column name must be considered as the event timestamp, for a given table. For each table, there **MUST** be one or zero column name. Theses values are used to add the desired timestamp to the event.
+
+```json
+{
+    "moz_bookmarks": "lastModified",        # Firefox
+    "moz_bookmarks_deleted": "dateRemoved",
+    "moz_historyvisits": "visit_date",
+    "moz_items_annos": "lastModified",
+    "moz_places": "last_visit_date",
+    "moz_places_metadatas": "updated_at",
+    "downloads": "end_time",                # Chrome
+    "urls": "last_visit_time",
+    "visits": "visit_time"
+}
+```
+
+#### Supported Browsers
+
+- Firefox (tested on version 133)
+
+- Chrome (tested on version 131). So I assume my plugin is compatible with Chromium based browsers (not tested).
+
+- **Not tested** on Safari (not supported on Windows since years).
