@@ -83,7 +83,7 @@ def _merge_sorted_files(paths: list[Path], output_path: str, temp_dir: str) -> i
         encoding="utf-8",
         newline="",
     ) as outfile:
-        shutil.copyfileobj(infile, outfile)  # type: ignore[misc]
+        shutil.copyfileobj(infile, outfile)
 
     return events_count
 

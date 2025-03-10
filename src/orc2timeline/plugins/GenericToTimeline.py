@@ -89,7 +89,7 @@ def _extract_filtered_files_from_archive(
                 path=extraction_path,
             )
     except OSError as e:
-        if "File name too long:" in str(e) or os.name == "nt" and "Invalid argument" in str(e):
+        if "File name too long:" in str(e) or (os.name == "nt" and "Invalid argument" in str(e)):
             _extract_safe(archive_path, extraction_path, filter_function)
         else:
             raise
