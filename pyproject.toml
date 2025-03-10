@@ -298,8 +298,7 @@ select = ["ALL"]
 # D212 and D213 are incompatible
 # D400 [*] First line should end with a period
 # D101 Missing docstring in public class
-# ANN101 Missing type annotation for `self` in method
-ignore = ["D203", "D213", "D400", "D101", "ANN101", "PERF203", "N999"]
+ignore = ["D203", "D213", "D400", "D101", "PERF203", "N999"]
 fixable = ["ALL"]
 unfixable = []
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
