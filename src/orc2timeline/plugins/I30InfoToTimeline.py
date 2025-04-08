@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import _csv
 import csv
-import logging
 import string
 from io import StringIO
 from pathlib import Path
@@ -107,7 +106,7 @@ class I30InfoToTimeline(GenericToTimeline):
         # when file contains NULL character, old versions of csv can crash
         except (_csv.Error, UnicodeDecodeError) as e:
             with Path(artefact).open(encoding="utf-8", errors="ignore") as fd:
-                logging.critical("csv error caught alternative way for host %s: %s", self.hostname, e)
+                self.logger.critical("csv error caught alternative way for host %s: %s", self.hostname, e)
                 self._delete_all_result_files()
                 data = fd.read()
                 clean_data = "".join(c for c in data if c in string.printable)

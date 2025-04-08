@@ -241,9 +241,9 @@ class GenericToTimeline:
         """
         self._flush_chunk()
         for output_file in self.output_files_list:
-            logging.critical("Delete %s", self.output_files_list)
+            self.logger.critical("Delete %s", self.output_files_list)
             output_file.unlink()
-        logging.critical("Reinitialization of chunks")
+        self.logger.critical("Reinitialization of chunks")
 
         self.current_chunk = SortedChunk(10000)
         self.csvWriter = csv.writer(self.current_chunk, delimiter=",", quotechar='"')
@@ -271,7 +271,7 @@ class GenericToTimeline:
                 try:
                     _extract_matching_files_from_archive(orc, extraction_path, self.match_pattern)
                 except Exception as e:  # noqa: BLE001
-                    logging.critical(
+                    self.logger.critical(
                         "Unable to open %s archive. Error: %s",
                         orc,
                         e,
@@ -295,7 +295,7 @@ class GenericToTimeline:
                         err_msg = f"Unable to deflate {sub_archive} from {orc}. Error: {e}"
                         if "Invalid argument" in str(e):
                             err_msg += " (this may happen when compressed file is empty)"
-                        logging.critical(err_msg)
+                        self.logger.critical(err_msg)
 
     def _parse_artefact(self, artefact: Path) -> None:
         """Artefact specific function.
@@ -318,7 +318,7 @@ class GenericToTimeline:
                     self.originalPath[Path(line[5].replace("\\", "/")).name] = line[4]
             path_to_file.unlink()
         except Exception as e:  # noqa: BLE001
-            logging.debug(str(e))
+            self.logger.debug(str(e))
 
     def _parse_all_artefacts(self) -> None:
         for art in Path(self.tmpDirectory.name).glob("**/all_extraction/**/*"):
@@ -334,7 +334,7 @@ class GenericToTimeline:
                         archive_name = file_path_split[i - 1]
             except Exception:  # noqa: BLE001
                 archive_name = "unknown"
-            logging.debug(
+            self.logger.debug(
                 "[%s] [%s] parsing : %s",
                 self.hostname,
                 archive_name,
@@ -346,7 +346,7 @@ class GenericToTimeline:
         timestamp = ""
 
         if event.timestamp is None and event.timestamp_str == "":
-            logging.critical("None Timestamp given for event %s", event)
+            self.logger.critical("None Timestamp given for event %s", event)
             timestamp = datetime.fromtimestamp(0, tz=pytz.UTC).strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
 
         if event.timestamp_str != "":
@@ -355,7 +355,7 @@ class GenericToTimeline:
             try:
                 timestamp = event.timestamp.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
             except ValueError as e:
-                logging.critical(e)
+                self.logger.critical(e)
                 timestamp = datetime.fromtimestamp(0, tz=pytz.UTC).strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
 
         self._write_line(
@@ -412,12 +412,12 @@ class GenericToTimeline:
 
     def add_to_timeline(self) -> int:
         """Create the result file with the result of argument parsing."""
-        logging.debug("%s started", self.__class__.__name__)
+        self.logger.debug("%s started", self.__class__.__name__)
         self.csvWriter = csv.writer(self.current_chunk, delimiter=",", quotechar='"')
         self._setup_next_output_file()
         self._deflate_archives()
         self._filter_files_based_on_first_bytes()
         self._parse_all_artefacts()
         self._flush_chunk()
-        logging.debug("%s ended", self.__class__.__name__)
+        self.logger.debug("%s ended", self.__class__.__name__)
         return self.written_rows_count

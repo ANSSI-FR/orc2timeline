@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import _csv
 import csv
-import logging
 import string
 from io import StringIO
 from pathlib import Path
@@ -44,7 +43,7 @@ class USNInfoToTimeline(GenericToTimeline):
             try:
                 mft_segment_number = int(row["FRN"], 16) & 0xFFFFFFFF
             except ValueError as e:
-                logging.warning("Error while getting FRN. Error: %s", e)
+                self.logger.warning("Error while getting FRN. Error: %s", e)
             full_path = row["FullPath"]
             reason = row["Reason"]
             event.description = f"{full_path} - {reason} - MFT segment num : {mft_segment_number}"
@@ -67,7 +66,7 @@ class USNInfoToTimeline(GenericToTimeline):
         # when file contains NULL character, old versions of csv can crash
         except (_csv.Error, UnicodeDecodeError) as e:
             with Path(artefact).open(encoding="utf-8", errors="ignore") as fd:
-                logging.critical("csv error caught alternative way for host %s: %s", self.hostname, e)
+                self.logger.critical("csv error caught alternative way for host %s: %s", self.hostname, e)
                 self._delete_all_result_files()
                 data = fd.read()
                 clean_data = "".join(c for c in data if c in string.printable)

@@ -17,12 +17,14 @@ import pyevtx
 
 from orc2timeline.plugins.GenericToTimeline import Event, GenericToTimeline
 
+LOGGER = logging.getLogger(__name__)
+
 
 def _get_event_id(event: Any) -> int | None:  # noqa: ANN401
     try:
         raw_event_id = event.get_event_identifier()
     except OSError:
-        logging.debug("Error while trying to recover event identifier")
+        LOGGER.debug("Error while trying to recover event identifier")
         return None
     # Mask the facility code, reserved, customer and severity bits. Only keeps the status code.
     return int(0xFFFF & raw_event_id)
@@ -35,7 +37,7 @@ def _get_args(event: Any) -> list[str]:  # noqa: ANN401
         args_number = event.get_number_of_strings()
     except OSError as e:
         if "unable to retrieve number of strings" in str(e):
-            logging.debug(
+            LOGGER.debug(
                 "Unable to retrieve args_number for event. Error: %s",
                 e,
             )
@@ -48,7 +50,7 @@ def _get_args(event: Any) -> list[str]:  # noqa: ANN401
             argi = event.get_string(i)
         except OSError as err:
             if "pyevtx_record_get_string_by_index: unable to determine size of string:" in str(err):
-                logging.debug("Unable to get string argument from event. Error: %s", err)
+                LOGGER.debug("Unable to get string argument from event. Error: %s", err)
             else:
                 raise
 
@@ -119,7 +121,7 @@ class EventLogsToTimeline(GenericToTimeline):
             try:
                 evtx_file.open_file_object(f)
             except OSError:
-                logging.critical(
+                self.logger.critical(
                     "Error while opening the event log file %s",
                     evtx_file_path,
                 )
@@ -128,7 +130,7 @@ class EventLogsToTimeline(GenericToTimeline):
                     try:
                         evtx = evtx_file.get_recovered_record(i)
                     except OSError as e:
-                        logging.debug(
+                        self.logger.debug(
                             "Error while parsing a recovered event record in %s. Error: %s",
                             evtx_file_path,
                             e,
@@ -143,7 +145,7 @@ class EventLogsToTimeline(GenericToTimeline):
             try:
                 evtx_file.open_file_object(f)
             except OSError:
-                logging.critical(
+                self.logger.critical(
                     "Error while opening the event log file %s",
                     evtx_file_path,
                 )
@@ -152,7 +154,7 @@ class EventLogsToTimeline(GenericToTimeline):
                     try:
                         evtx = evtx_file.get_record(i)
                     except OSError as e:
-                        logging.debug(
+                        self.logger.debug(
                             "Error while parsing an event record in %s. Error: %s",
                             evtx_file_path,
                             e,
@@ -173,7 +175,7 @@ class EventLogsToTimeline(GenericToTimeline):
         try:
             event_result.timestamp = event_input.get_written_time()
         except ValueError:
-            logging.critical("Unable to get written time from event in %s", event_file)
+            self.logger.critical("Unable to get written time from event in %s", event_file)
             return None
 
         # Event ID
@@ -190,7 +192,7 @@ class EventLogsToTimeline(GenericToTimeline):
             event_provider = event_input.get_source_name()
         except OSError as err:
             if "pyevtx_record_get_source_name: unable to determine size of source name as UTF-8 string." in str(err):
-                logging.debug("Unable to get source name from event")
+                self.logger.debug("Unable to get source name from event")
             else:
                 raise
         user_id = event_input.get_user_security_identifier()
@@ -215,7 +217,7 @@ class EventLogsToTimeline(GenericToTimeline):
 
                     splitted_line = my_line.split(":")
                     if len(splitted_line) != 2:  # noqa: PLR2004
-                        logging.warning(
+                        self.logger.warning(
                             'Wrong format for a line in %s: "%s"',
                             event_tags_file,
                             my_line,
@@ -226,7 +228,7 @@ class EventLogsToTimeline(GenericToTimeline):
 
                     splitted_event = event.split("/")
                     if len(splitted_event) != 2:  # noqa: PLR2004
-                        logging.warning(
+                        self.logger.warning(
                             'Wrong format for a line in %s: "%s"',
                             event_tags_file,
                             my_line,

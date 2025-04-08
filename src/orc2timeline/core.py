@@ -24,6 +24,7 @@ from .config import Config
 
 ROOT_DIR = Path(__file__).resolve().parent
 TEMP_DIRECTORY: Any = None
+LOGGER = logging.getLogger(__name__)
 
 
 def _add_header_to_csv_file(output_path: str) -> None:
@@ -95,7 +96,7 @@ def _merge_timelines_for_host(hostname: str, output_path: str, tmp_dir: tempfile
     for hostname in temporary directory to output_path file.
     """
     files_to_merge = list(Path(tmp_dir.name).glob(f"**/timeline_{hostname}_*"))
-    logging.info("Merging all timelines generated per artefact for host %s", hostname)
+    LOGGER.info("Merging all timelines generated per artefact for host %s", hostname)
 
     result = _merge_sorted_files(
         files_to_merge,
@@ -186,7 +187,7 @@ def process(file_list: list[Path], output_path: str, hostname: str, jobs: int) -
 
 def _process_inner(orc_argument: OrcArgument, jobs: int) -> int:
     """Create timeline from OrcArgument object with "jobs" threads."""
-    logging.info("Processing files for host: %s", orc_argument.hostname)
+    LOGGER.info("Processing files for host: %s", orc_argument.hostname)
     lock = None
     if jobs > 1:
         lock = multiprocessing.Manager().Lock()
@@ -299,8 +300,8 @@ def _check_orc_list_and_print_intro(orc_arguments: list[OrcArgument]) -> None:
     host_list = [orc_argument.hostname for orc_argument in orc_arguments]
     if not _is_list_uniq(host_list):
         dupes = _get_duplicate_values_from_list(host_list)
-        logging.critical("Unable to process directory if the same host is used many times.")
-        logging.critical("Hint, these hosts seem to be the source of the problem : %s", dupes)
+        LOGGER.critical("Unable to process directory if the same host is used many times.")
+        LOGGER.critical("Hint, these hosts seem to be the source of the problem : %s", dupes)
         sys.exit(2)
 
     _print_intro(orc_arguments)
@@ -309,10 +310,10 @@ def _check_orc_list_and_print_intro(orc_arguments: list[OrcArgument]) -> None:
 def _print_intro(orc_arguments: list[OrcArgument]) -> None:
     """Print simple intro that sums up the files that will be used to generate timelines."""
     for orc_argument in orc_arguments:
-        logging.info("==============================================")
-        logging.info("Host: %s", orc_argument.hostname)
-        logging.info("Files used: [%s]", ", ".join(str(path) for path in orc_argument.orc_paths))
-        logging.info("Result file: %s", orc_argument.output_path)
+        LOGGER.info("==============================================")
+        LOGGER.info("Host: %s", orc_argument.hostname)
+        LOGGER.info("Files used: [%s]", ", ".join(str(path) for path in orc_argument.orc_paths))
+        LOGGER.info("Result file: %s", orc_argument.output_path)
 
 
 def _print_summaries(total_results_per_host: dict[str, int], all_results: list[tuple[str, str, int]]) -> None:
@@ -326,27 +327,27 @@ def _print_summaries(total_results_per_host: dict[str, int], all_results: list[t
         List of tuple (hostname, plugin_name, events_number)
 
     """
-    logging.info("== Printing final summary of generated timelines:")
+    LOGGER.info("== Printing final summary of generated timelines:")
     host_list = sorted(set(total_results_per_host.keys()))
     for host in host_list:
-        logging.info(
+        LOGGER.info(
             "=======================================================================",
         )
-        logging.info("====== Hostname: %s - %s events", host, total_results_per_host[host])
+        LOGGER.info("====== Hostname: %s - %s events", host, total_results_per_host[host])
         results_filtered_by_host = _get_all_results_filtered_by_host(all_results, host)
         plugin_list = sorted({plugin[1] for plugin in results_filtered_by_host})
         for plugin in plugin_list:
             results_filtered_by_plugin = _get_all_results_filtered_by_plugin(results_filtered_by_host, plugin)
             sum_for_plugin = sum([int(plugin[2]) for plugin in results_filtered_by_plugin])
             # for plugin in results_filtered_by_host:
-            logging.info("========== %s %s %s", host, plugin, sum_for_plugin)
-        logging.info("====== Total for %s: %s", host, total_results_per_host[host])
+            LOGGER.info("========== %s %s %s", host, plugin, sum_for_plugin)
+        LOGGER.info("====== Total for %s: %s", host, total_results_per_host[host])
 
-    logging.info(
+    LOGGER.info(
         "=======================================================================",
     )
-    logging.info("====== Total: %s events processed", sum(total_results_per_host.values()))
-    logging.info(
+    LOGGER.info("====== Total: %s events processed", sum(total_results_per_host.values()))
+    LOGGER.info(
         "=======================================================================",
     )
 
