@@ -48,19 +48,19 @@ def _get_relevant_archives(orc_list: list[str], archive_list: list[str]) -> Iter
     """
     for orc in orc_list:
         for archive in archive_list:
-            if archive in Path(orc).name:
+            if archive.casefold() in Path(orc).name.casefold():
                 yield orc, archive
 
 
 def _extract_sub_archives_from_archive(archive_path: str, extraction_path: Path, sub_archive: str) -> None:
     def _sub_archive_filter(f: str) -> bool:
-        return f == sub_archive
+        return f.casefold() == sub_archive.casefold()
 
     _extract_filtered_files_from_archive(archive_path, extraction_path, _sub_archive_filter)
 
 
 def _extract_matching_files_from_archive(archive_path: str, extraction_path: Path, match_pattern: str) -> None:
-    filter_pattern = re.compile(match_pattern)
+    filter_pattern = re.compile(match_pattern, re.IGNORECASE)
 
     def _re_filter(input_str: str) -> bool:
         return bool(filter_pattern.match(input_str))
@@ -70,7 +70,7 @@ def _extract_matching_files_from_archive(archive_path: str, extraction_path: Pat
 
 def _extract_getthis_file_from_archive(archive_path: str, extraction_path: Path) -> None:
     def _get_this_filter(f: str) -> bool:
-        return f == "GetThis.csv"
+        return f.casefold() == "GetThis.csv".casefold()
 
     _extract_filtered_files_from_archive(archive_path, extraction_path, _get_this_filter)
 
@@ -284,12 +284,13 @@ class GenericToTimeline:
                         )
 
                         _extract_sub_archives_from_archive(orc, sub_extraction_path, sub_archive)
-                        for f2 in Path(sub_extraction_path).glob(f"./**/{sub_archive}"):
-                            _extract_matching_files_from_archive(str(f2), extraction_path, self.match_pattern)
-                            _extract_getthis_file_from_archive(str(f2), extraction_path)
-                            self._parse_then_delete_getthis_file(
-                                extraction_path / "GetThis.csv",
-                            )
+                        for f2 in Path(sub_extraction_path).glob("*"):
+                            if f2.name.casefold() == sub_archive.casefold():
+                                _extract_matching_files_from_archive(str(f2), extraction_path, self.match_pattern)
+                                _extract_getthis_file_from_archive(str(f2), extraction_path)
+                                self._parse_then_delete_getthis_file(
+                                    extraction_path / "GetThis.csv",
+                                )
                         _delete_everything_in_dir(sub_extraction_path)
                     except Exception as e:  # noqa: BLE001
                         err_msg = f"Unable to deflate {sub_archive} from {orc}. Error: {e}"
