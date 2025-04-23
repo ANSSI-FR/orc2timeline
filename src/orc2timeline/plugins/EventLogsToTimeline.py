@@ -90,7 +90,7 @@ class EventLogsToTimeline(GenericToTimeline):
         description += f" {user_id}"
 
         if len(args) != 0:
-            args_string = " ".join(args)
+            args_string = "|".join(args)
             description += f" ({args_string})"
 
         return description
