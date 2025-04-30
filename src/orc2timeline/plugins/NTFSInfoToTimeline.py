@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import _csv
 import csv
-import logging
 import string
 from io import StringIO
 from pathlib import Path
@@ -92,7 +91,7 @@ class NTFSInfoToTimeline(GenericToTimeline):
         try:
             size_in_bytes = ntfs_info_row.get("SizeInBytes")
         except ValueError as e:
-            logging.debug("Error while getting FRN or Size. Error: %s", e)
+            self.logger.debug("Error while getting FRN or Size. Error: %s", e)
 
         event.description = f"{meaning} - Name: {name} - Size in bytes: {size_in_bytes}"
         self._add_event(event)
@@ -145,7 +144,7 @@ class NTFSInfoToTimeline(GenericToTimeline):
         # when file contains NULL character, old versions of csv can crash
         except (_csv.Error, UnicodeDecodeError) as e:
             with Path(artefact).open(encoding="utf-8", errors="ignore") as fd:
-                logging.critical("csv error caught alternative way for host %s: %s", self.hostname, e)
+                self.logger.critical("csv error caught alternative way for host %s: %s", self.hostname, e)
                 self._delete_all_result_files()
                 data = fd.read()
                 clean_data = "".join(c for c in data if c in string.printable)

@@ -35,7 +35,7 @@ def test_process_1_job() -> None:
 
     process(file_list, "tests/output/FAKEMACHINE.csv.gz", "FAKEMACHINE", 1)
 
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "4c560b37c79b2ed0f43b50f4d908139f0fe96fe0"
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "6c9f7897fef29c7006a4cb992117abaeba8fa8eb"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
 
@@ -54,7 +54,7 @@ def test_process_5_jobs() -> None:
 
     process(file_list, "tests/output/FAKEMACHINE.csv.gz", "FAKEMACHINE", 5)
 
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "4c560b37c79b2ed0f43b50f4d908139f0fe96fe0"
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "6c9f7897fef29c7006a4cb992117abaeba8fa8eb"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
 
@@ -73,5 +73,5 @@ def test_null_in_csv_files() -> None:
 
     process(file_list, "tests/output/FAKEMACHINE.csv.gz", "FAKEMACHINE", 1)
 
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "4c560b37c79b2ed0f43b50f4d908139f0fe96fe0"
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "6c9f7897fef29c7006a4cb992117abaeba8fa8eb"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()

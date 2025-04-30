@@ -121,7 +121,7 @@ def test_dir_no_job() -> None:
     assert "========== FAKEMACHINE USNInfoToTimeline 99" in err
     assert "========== FAKEMACHINE I30InfoToTimeline 54" in err
     assert "====== Total for FAKEMACHINE: 1149" in err
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "4c560b37c79b2ed0f43b50f4d908139f0fe96fe0"
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "6c9f7897fef29c7006a4cb992117abaeba8fa8eb"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
     for f in Path("tests/output").glob("**"):
@@ -150,7 +150,7 @@ def test_dir_1_jobs() -> None:
     assert "========== FAKEMACHINE USNInfoToTimeline 99" in err
     assert "========== FAKEMACHINE I30InfoToTimeline 54" in err
     assert "====== Total for FAKEMACHINE: 1149" in err
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "4c560b37c79b2ed0f43b50f4d908139f0fe96fe0"
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "6c9f7897fef29c7006a4cb992117abaeba8fa8eb"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
     for f in Path("tests/output").glob("**"):
@@ -179,7 +179,7 @@ def test_dir_5_jobs() -> None:
     assert "========== FAKEMACHINE USNInfoToTimeline 99" in err
     assert "========== FAKEMACHINE I30InfoToTimeline 54" in err
     assert "====== Total for FAKEMACHINE: 1149" in err
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "4c560b37c79b2ed0f43b50f4d908139f0fe96fe0"
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "6c9f7897fef29c7006a4cb992117abaeba8fa8eb"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
     for f in Path("tests/output").glob("**"):
@@ -246,7 +246,7 @@ def test_simple_5_jobs() -> None:
     assert "========== FAKEMACHINE USNInfoToTimeline 99" in err
     assert "========== FAKEMACHINE I30InfoToTimeline 54" in err
     assert "====== Total for FAKEMACHINE: 1149" in err
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "4c560b37c79b2ed0f43b50f4d908139f0fe96fe0"
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "6c9f7897fef29c7006a4cb992117abaeba8fa8eb"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
 
@@ -275,7 +275,7 @@ def test_simple_1_job() -> None:
     assert "========== FAKEMACHINE USNInfoToTimeline 99" in err
     assert "========== FAKEMACHINE I30InfoToTimeline 54" in err
     assert "====== Total for FAKEMACHINE: 1149" in err
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "4c560b37c79b2ed0f43b50f4d908139f0fe96fe0"
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "6c9f7897fef29c7006a4cb992117abaeba8fa8eb"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
 
@@ -303,7 +303,7 @@ def test_simple_no_job() -> None:
     assert "========== FAKEMACHINE USNInfoToTimeline 99" in err
     assert "========== FAKEMACHINE I30InfoToTimeline 54" in err
     assert "====== Total for FAKEMACHINE: 1149" in err
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "4c560b37c79b2ed0f43b50f4d908139f0fe96fe0"
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "6c9f7897fef29c7006a4cb992117abaeba8fa8eb"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
 

@@ -18,13 +18,13 @@ maintainers = [
 ]
 dependencies = [
   "click>=8.1.0",
-  "dateparser==1.2.0",
-  "py7zr==0.21.0",
-  "libevtx-python==20240204",
+  "dateparser==1.2.1",
+  "py7zr==0.22.0",
+  "libevtx-python==20240504",
   "libesedb-python==20240420",
   "dfwinreg==20240229",
-  "six==1.16.0",
-  "pytz==2024.1",
+  "six==1.17.0",
+  "pytz==2025.2",
 ]
 
 readme = "README.rst"
@@ -298,8 +298,7 @@ select = ["ALL"]
 # D212 and D213 are incompatible
 # D400 [*] First line should end with a period
 # D101 Missing docstring in public class
-# ANN101 Missing type annotation for `self` in method
-ignore = ["D203", "D213", "D400", "D101", "ANN101", "PERF203", "N999"]
+ignore = ["D203", "D213", "D400", "D101", "PERF203", "N999"]
 fixable = ["ALL"]
 unfixable = []
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"

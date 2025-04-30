@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import logging
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -115,7 +114,7 @@ class RegistryToTimeline(GenericToTimeline):
             key_path = "Unknown"
             if key_path:
                 key_path = key.path
-            logging.critical("Unable to print key %s from %s. Error: %s", key_path, artefact, e)
+            self.logger.critical("Unable to print key %s from %s. Error: %s", key_path, artefact, e)
 
     def _print_all_keyvalues(self, key: dfwinreg_regf.REGFWinRegistryValue, artefact: Path) -> None:
         for value in key.GetValues():
@@ -142,7 +141,7 @@ class RegistryToTimeline(GenericToTimeline):
                     subkey = key.GetSubkeyByIndex(subkey_index)
                     self._parse_key(subkey, artefact)
                 except OSError as e:
-                    logging.debug("Error while parsing registry keys: %s", e)
+                    self.logger.debug("Error while parsing registry keys: %s", e)
 
     def _parse_artefact(self, artefact: Path) -> None:
         with Path(artefact).open("rb") as f:
@@ -155,7 +154,7 @@ class RegistryToTimeline(GenericToTimeline):
                 root_key = reg_file.GetRootKey()
                 self._parse_key(root_key, artefact)
             except Exception as e:  # noqa: BLE001
-                logging.warning(
+                self.logger.warning(
                     "Error while parsing %s: %s",
                     Path(artefact).name,
                     e,

@@ -10,6 +10,7 @@ import yaml
 
 DEFAULT_CONFIG_FILE = "Orc2Timeline.yaml"
 ROOT_DIR = Path(__file__).resolve().parent
+LOGGER = logger = logging.getLogger(__name__)
 
 
 class Orc2TimelineConfigError(Exception):
@@ -23,12 +24,12 @@ class Config:
         config_file = ROOT_DIR / "conf" / DEFAULT_CONFIG_FILE
 
         if not config_file.exists():
-            logging.error('Cannot read configuration file "%s" (file does not exist)', config_file)
+            LOGGER.error('Cannot read configuration file "%s" (file does not exist)', config_file)
             error_str = f'Cannot read configuration file "{config_file}" (file does not exist)'
             raise Orc2TimelineConfigError(error_str)
 
         if not config_file.is_file():
-            logging.error('Cannot read configuration file "%s" (is not a file)', config_file)
+            LOGGER.error('Cannot read configuration file "%s" (is not a file)', config_file)
             error_str = f'Cannot read configuration file "{config_file}" (is not a file)'
             raise Orc2TimelineConfigError(error_str)
 
@@ -37,7 +38,7 @@ class Config:
                 self.global_config = yaml.safe_load(conf_file)
                 self._parse_global_config()
         except yaml.error.MarkedYAMLError:
-            logging.critical("An error occured while parsing configuration (file: %s)", str(config_file))
+            LOGGER.critical("An error occured while parsing configuration (file: %s)", str(config_file))
             raise
 
         self.config_file = config_file
@@ -76,7 +77,7 @@ class Config:
                             )
                             self.plugin_conf_list.append(plugin_conf)
         if len(self.plugin_conf_list) == 0:
-            logging.critical("Plugin list seems empty, exiting.")
+            LOGGER.critical("Plugin list seems empty, exiting.")
             sys.exit(1)
 
 

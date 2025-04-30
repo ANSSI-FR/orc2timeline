@@ -17,6 +17,8 @@ LOG_LEVELS = ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]
 ORC_REGEX = r"^(?:DFIR\-)?ORC_[^_]*_(.*)_[^_]*\.7z$"
 RESULT_EXTENSION = ".csv.gz"
 
+LOGGER = logging.getLogger(__name__)
+
 
 @click.group(name="orc2timeline", help=__description__, epilog=f"{__version__} - {__copyright__}")
 @click.version_option(__version__)
@@ -111,7 +113,7 @@ def cmd_process(jobs: int, file_list: str, output_path: str, *, overwrite: bool)
         )
         raise click.BadParameter(msg)
     if jobs == -1:
-        logging.warning(
+        LOGGER.warning(
             "--jobs option was not given, thus only one thread will be used. Therefore processing could take a while.",
         )
 
@@ -129,11 +131,11 @@ def cmd_process(jobs: int, file_list: str, output_path: str, *, overwrite: bool)
                     rf"Impossible to extract hostname from filename '{file}', file will be ignored."
                     rf" Tip: filename must match regex '{ORC_REGEX}'"
                 )
-                logging.info(msg)
+                LOGGER.info(msg)
 
         except AttributeError:
             msg = rf"Impossible to extract hostname from filename '{file}', filename must match regex '{ORC_REGEX}'"
-            logging.info(msg)
+            LOGGER.info(msg)
 
         if hostname != "":
             hostname_set.add(hostname)
@@ -159,7 +161,7 @@ def cmd_process(jobs: int, file_list: str, output_path: str, *, overwrite: bool)
 def cmd_process_dir(jobs: int, input_dir: str, output_dir: str, *, overwrite: bool) -> None:
     """Process all ORCs in INPUT_DIRECTORY, writes output files in OUTPUT_DIR."""
     if jobs == -1:
-        logging.warning(
+        LOGGER.warning(
             "--jobs option was not given, thus only one thread will be used. Therefore processing could take a while.",
         )
 
@@ -170,7 +172,7 @@ def cmd_process_dir(jobs: int, input_dir: str, output_dir: str, *, overwrite: bo
         if orc_argument.output_path.exists() and not overwrite:
             # verify if destination output already exists
             # create output directory if it does not exist
-            logging.warning(
+            LOGGER.warning(
                 "Output file '%s' already exists, processing will be ignored for host %s"
                 " use '--overwrite' if you know what you are doing.",
                 orc_argument.output_path.as_posix(),
