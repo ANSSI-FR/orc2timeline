@@ -107,7 +107,7 @@ class RegistryToTimeline(GenericToTimeline):
             event = Event(
                 timestamp_str=key.last_written_time.CopyToDateTimeString()[:-4],
                 source=self._get_original_path(artefact),
-                description=key.path,
+                description=str(key.path),
             )
             self._add_event(event)
         except Exception as e:  # noqa: BLE001

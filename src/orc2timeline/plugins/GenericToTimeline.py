@@ -375,7 +375,10 @@ class GenericToTimeline:
         file.
         """
         # sanitize output
-        rows_to_write = [row.replace("\n", "\\n") for row in (date, self.hostname, sourcetype, description, sourcefile)]
+        rows_to_write = [
+            row.replace("\n", "\\n").replace("\r", "\\r")
+            for row in (date, self.hostname, sourcetype, description, sourcefile)
+        ]
         self.csvWriter.writerow(rows_to_write)
         if self.current_chunk.is_full():
             self._flush_chunk_and_new_chunk()
