@@ -31,7 +31,7 @@ def _add_header_to_csv_file(output_path: str) -> None:
     """Add header at the beginning of csv file."""
     header = ["Timestamp", "Hostname", "SourceType", "Description", "SourceFile"]
     with gzip.open(output_path, "wt", newline="") as f:
-        csv_dict_writer = csv.DictWriter(f, delimiter=",", quotechar='"', fieldnames=header)
+        csv_dict_writer = csv.DictWriter(f, delimiter=",", quotechar='"', fieldnames=header, escapechar="`")
         csv_dict_writer.writeheader()
 
 

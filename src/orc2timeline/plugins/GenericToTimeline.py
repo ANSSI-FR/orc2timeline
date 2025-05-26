@@ -246,7 +246,7 @@ class GenericToTimeline:
         self.logger.critical("Reinitialization of chunks")
 
         self.current_chunk = SortedChunk(10000)
-        self.csvWriter = csv.writer(self.current_chunk, delimiter=",", quotechar='"')
+        self.csvWriter = csv.writer(self.current_chunk, delimiter=",", quotechar='"', escapechar="`")
         self.output_files_list = []
         self._setup_next_output_file()
 
@@ -417,7 +417,7 @@ class GenericToTimeline:
     def add_to_timeline(self) -> int:
         """Create the result file with the result of argument parsing."""
         self.logger.debug("%s started", self.__class__.__name__)
-        self.csvWriter = csv.writer(self.current_chunk, delimiter=",", quotechar='"')
+        self.csvWriter = csv.writer(self.current_chunk, delimiter=",", quotechar='"', escapechar="`")
         self._setup_next_output_file()
         self._deflate_archives()
         self._filter_files_based_on_first_bytes()
