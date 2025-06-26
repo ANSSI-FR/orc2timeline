@@ -34,3 +34,9 @@ Plugins:
       sub_archives: ["Browsers_history.7z", "GetBrowsers_History.7z", "Browsers_complet.7z"]
       match_pattern: ".*places\\.sqlite.*data$"
       sourcetype: "FirefoxHistory"
+
+  - RecycleBinToTimeline:
+      archives: ["General"]
+      sub_archives: ["Residents.7z"]
+      match_pattern: "(.*fichiers_residents/.*_\\$I.*data$)"
+      sourcetype: "RecycleBin"

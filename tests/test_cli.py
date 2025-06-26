@@ -114,15 +114,16 @@ def test_dir_no_job() -> None:
     )
 
     assert "== Printing final summary of generated timelines:" in err
-    assert "====== Hostname: FAKEMACHINE - 1162 events" in err
+    assert "====== Hostname: FAKEMACHINE - 1163 events" in err
     assert "========== FAKEMACHINE RegistryToTimeline 683" in err
     assert "========== FAKEMACHINE EventLogsToTimeline 125" in err
     assert "========== FAKEMACHINE NTFSInfoToTimeline 413" in err
     assert "========== FAKEMACHINE USNInfoToTimeline 99" in err
     assert "========== FAKEMACHINE I30InfoToTimeline 54" in err
     assert "========== FAKEMACHINE FirefoxHistoryToTimeline 13" in err
-    assert "====== Total for FAKEMACHINE: 1162" in err
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "c485ca85a5c13661eaebacc2829e413eaa95ab3a"
+    assert "========== FAKEMACHINE RecycleBinToTimeline 1" in err
+    assert "====== Total for FAKEMACHINE: 1163" in err
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "b440f41e2c678ed03005e76a2d0872e310d00a40"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
     for f in Path("tests/output").glob("**"):
@@ -144,15 +145,16 @@ def test_dir_1_jobs() -> None:
     )
 
     assert "== Printing final summary of generated timelines:" in err
-    assert "====== Hostname: FAKEMACHINE - 1162 events" in err
+    assert "====== Hostname: FAKEMACHINE - 1163 events" in err
     assert "========== FAKEMACHINE RegistryToTimeline 683" in err
     assert "========== FAKEMACHINE EventLogsToTimeline 125" in err
     assert "========== FAKEMACHINE NTFSInfoToTimeline 413" in err
     assert "========== FAKEMACHINE USNInfoToTimeline 99" in err
     assert "========== FAKEMACHINE I30InfoToTimeline 54" in err
     assert "========== FAKEMACHINE FirefoxHistoryToTimeline 13" in err
-    assert "====== Total for FAKEMACHINE: 1162" in err
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "c485ca85a5c13661eaebacc2829e413eaa95ab3a"
+    assert "========== FAKEMACHINE RecycleBinToTimeline 1" in err
+    assert "====== Total for FAKEMACHINE: 1163" in err
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "b440f41e2c678ed03005e76a2d0872e310d00a40"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
     for f in Path("tests/output").glob("**"):
@@ -174,15 +176,16 @@ def test_dir_5_jobs() -> None:
     )
 
     assert "== Printing final summary of generated timelines:" in err
-    assert "====== Hostname: FAKEMACHINE - 1162 events" in err
+    assert "====== Hostname: FAKEMACHINE - 1163 events" in err
     assert "========== FAKEMACHINE RegistryToTimeline 683" in err
     assert "========== FAKEMACHINE EventLogsToTimeline 125" in err
     assert "========== FAKEMACHINE NTFSInfoToTimeline 413" in err
     assert "========== FAKEMACHINE USNInfoToTimeline 99" in err
     assert "========== FAKEMACHINE I30InfoToTimeline 54" in err
     assert "========== FAKEMACHINE FirefoxHistoryToTimeline 13" in err
-    assert "====== Total for FAKEMACHINE: 1162" in err
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "c485ca85a5c13661eaebacc2829e413eaa95ab3a"
+    assert "========== FAKEMACHINE RecycleBinToTimeline 1" in err
+    assert "====== Total for FAKEMACHINE: 1163" in err
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "b440f41e2c678ed03005e76a2d0872e310d00a40"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
     for f in Path("tests/output").glob("**"):
@@ -242,15 +245,16 @@ def test_simple_5_jobs() -> None:
     )
 
     assert "== Printing final summary of generated timelines:" in err
-    assert "====== Hostname: FAKEMACHINE - 1162 events" in err
+    assert "====== Hostname: FAKEMACHINE - 1163 events" in err
     assert "========== FAKEMACHINE RegistryToTimeline 683" in err
     assert "========== FAKEMACHINE EventLogsToTimeline 125" in err
     assert "========== FAKEMACHINE NTFSInfoToTimeline 413" in err
     assert "========== FAKEMACHINE USNInfoToTimeline 99" in err
     assert "========== FAKEMACHINE I30InfoToTimeline 54" in err
     assert "========== FAKEMACHINE FirefoxHistoryToTimeline 13" in err
-    assert "====== Total for FAKEMACHINE: 1162" in err
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "c485ca85a5c13661eaebacc2829e413eaa95ab3a"
+    assert "========== FAKEMACHINE RecycleBinToTimeline 1" in err
+    assert "====== Total for FAKEMACHINE: 1163" in err
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "b440f41e2c678ed03005e76a2d0872e310d00a40"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
 
@@ -272,15 +276,16 @@ def test_simple_1_job() -> None:
     )
 
     assert "== Printing final summary of generated timelines:" in err
-    assert "====== Hostname: FAKEMACHINE - 1162 events" in err
+    assert "====== Hostname: FAKEMACHINE - 1163 events" in err
     assert "========== FAKEMACHINE RegistryToTimeline 683" in err
     assert "========== FAKEMACHINE EventLogsToTimeline 125" in err
     assert "========== FAKEMACHINE NTFSInfoToTimeline 413" in err
     assert "========== FAKEMACHINE USNInfoToTimeline 99" in err
     assert "========== FAKEMACHINE I30InfoToTimeline 54" in err
     assert "========== FAKEMACHINE FirefoxHistoryToTimeline 13" in err
-    assert "====== Total for FAKEMACHINE: 1162" in err
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "c485ca85a5c13661eaebacc2829e413eaa95ab3a"
+    assert "========== FAKEMACHINE RecycleBinToTimeline 1" in err
+    assert "====== Total for FAKEMACHINE: 1163" in err
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "b440f41e2c678ed03005e76a2d0872e310d00a40"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
 
@@ -301,15 +306,16 @@ def test_simple_no_job() -> None:
     )
 
     assert "== Printing final summary of generated timelines:" in err
-    assert "====== Hostname: FAKEMACHINE - 1162 events" in err
+    assert "====== Hostname: FAKEMACHINE - 1163 events" in err
     assert "========== FAKEMACHINE RegistryToTimeline 683" in err
     assert "========== FAKEMACHINE EventLogsToTimeline 125" in err
     assert "========== FAKEMACHINE NTFSInfoToTimeline 413" in err
     assert "========== FAKEMACHINE USNInfoToTimeline 99" in err
     assert "========== FAKEMACHINE I30InfoToTimeline 54" in err
     assert "========== FAKEMACHINE FirefoxHistoryToTimeline 13" in err
-    assert "====== Total for FAKEMACHINE: 1162" in err
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "c485ca85a5c13661eaebacc2829e413eaa95ab3a"
+    assert "========== FAKEMACHINE RecycleBinToTimeline 1" in err
+    assert "====== Total for FAKEMACHINE: 1163" in err
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "b440f41e2c678ed03005e76a2d0872e310d00a40"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
 
@@ -336,14 +342,15 @@ def test_simple_log_file() -> None:
         with Path("tests/output/blabla.log").open("r") as f:
             data = f.read()
             assert "== Printing final summary of generated timelines:" in data
-            assert "====== Hostname: FAKEMACHINE - 1162 events" in data
+            assert "====== Hostname: FAKEMACHINE - 1163 events" in data
             assert "========== FAKEMACHINE RegistryToTimeline 683" in data
             assert "========== FAKEMACHINE EventLogsToTimeline 125" in data
             assert "========== FAKEMACHINE NTFSInfoToTimeline 413" in data
             assert "========== FAKEMACHINE USNInfoToTimeline 99" in data
             assert "========== FAKEMACHINE I30InfoToTimeline 54" in data
             assert "========== FAKEMACHINE FirefoxHistoryToTimeline 13" in data
-            assert "====== Total for FAKEMACHINE: 1162" in data
+            assert "========== FAKEMACHINE RecycleBinToTimeline 1" in err
+            assert "====== Total for FAKEMACHINE: 1163" in data
 
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
     Path("tests/output/blabla.log").unlink()
