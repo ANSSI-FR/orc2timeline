@@ -40,3 +40,9 @@ Plugins:
       sub_archives: ["Residents.7z"]
       match_pattern: "(.*fichiers_residents/.*_\\$I.*data$)"
       sourcetype: "RecycleBin"
+
+  - UserAssistToTimeline:
+      archives: ["Detail", "Offline"]
+      sub_archives: ["UserHives.7z"]
+      match_pattern: ".*NTUSER\\.DAT.*"
+      sourcetype: "UserAssist"
