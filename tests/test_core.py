@@ -26,8 +26,8 @@ def test_process_1_job() -> None:
         Path("tests/data/conf_7_archives/ORC_Server_FAKEMACHINE_General.7z"),
         Path("tests/data/conf_7_archives/ORC_Server_FAKEMACHINE_Detail.7z"),
         Path("tests/data/conf_7_archives/ORC_Server_FAKEMACHINE_Little.7z"),
-        Path("tests/data/conf_7_archives/ORC_Server_FAKEMACHINE_Memory.7z"),
         Path("tests/data/conf_7_archives/ORC_Server_FAKEMACHINE_SAM.7z"),
+        Path("tests/data/conf_7_archives/ORC_Server_FAKEMACHINE_Browsers.7z"),
     ]
 
     if Path("tests/output/FAKEMACHINE.csv.gz").exists():
@@ -35,7 +35,7 @@ def test_process_1_job() -> None:
 
     process(file_list, "tests/output/FAKEMACHINE.csv.gz", "FAKEMACHINE", 1)
 
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "6c9f7897fef29c7006a4cb992117abaeba8fa8eb"
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "c485ca85a5c13661eaebacc2829e413eaa95ab3a"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
 
@@ -45,8 +45,8 @@ def test_process_5_jobs() -> None:
         Path("tests/data/conf_7_archives/ORC_Server_FAKEMACHINE_General.7z"),
         Path("tests/data/conf_7_archives/ORC_Server_FAKEMACHINE_Detail.7z"),
         Path("tests/data/conf_7_archives/ORC_Server_FAKEMACHINE_Little.7z"),
-        Path("tests/data/conf_7_archives/ORC_Server_FAKEMACHINE_Memory.7z"),
         Path("tests/data/conf_7_archives/ORC_Server_FAKEMACHINE_SAM.7z"),
+        Path("tests/data/conf_7_archives/ORC_Server_FAKEMACHINE_Browsers.7z"),
     ]
 
     if Path("tests/output/FAKEMACHINE.csv.gz").exists():
@@ -54,7 +54,7 @@ def test_process_5_jobs() -> None:
 
     process(file_list, "tests/output/FAKEMACHINE.csv.gz", "FAKEMACHINE", 5)
 
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "6c9f7897fef29c7006a4cb992117abaeba8fa8eb"
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "c485ca85a5c13661eaebacc2829e413eaa95ab3a"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()
 
 
@@ -64,8 +64,8 @@ def test_null_in_csv_files() -> None:
         Path("tests/data/null_csv/ORC_Server_FAKEMACHINE_General.7z"),
         Path("tests/data/null_csv/ORC_Server_FAKEMACHINE_Detail.7z"),
         Path("tests/data/null_csv/ORC_Server_FAKEMACHINE_Little.7z"),
-        Path("tests/data/null_csv/ORC_Server_FAKEMACHINE_Memory.7z"),
         Path("tests/data/null_csv/ORC_Server_FAKEMACHINE_SAM.7z"),
+        Path("tests/data/null_csv/ORC_Server_FAKEMACHINE_Browsers.7z"),
     ]
 
     if Path("tests/output/FAKEMACHINE.csv.gz").exists():
@@ -73,5 +73,5 @@ def test_null_in_csv_files() -> None:
 
     process(file_list, "tests/output/FAKEMACHINE.csv.gz", "FAKEMACHINE", 1)
 
-    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "6c9f7897fef29c7006a4cb992117abaeba8fa8eb"
+    assert _zcat_and_sha1("tests/output/FAKEMACHINE.csv.gz") == "c485ca85a5c13661eaebacc2829e413eaa95ab3a"
     Path("tests/output/FAKEMACHINE.csv.gz").unlink()

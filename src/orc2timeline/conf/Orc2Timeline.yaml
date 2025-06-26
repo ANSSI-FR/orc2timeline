@@ -28,3 +28,9 @@ Plugins:
       sub_archives: ["NTFSInfo_i30Info.7z"]
       match_pattern: "^I30Info.*\\.csv$"
       sourcetype: "I30"
+
+  - FirefoxHistoryToTimeline:
+      archives: ["Browsers", "General", "Offline"]
+      sub_archives: ["Browsers_history.7z", "GetBrowsers_History.7z", "Browsers_complet.7z"]
+      match_pattern: ".*places\\.sqlite.*data$"
+      sourcetype: "FirefoxHistory"
