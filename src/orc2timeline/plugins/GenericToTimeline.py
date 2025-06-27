@@ -246,7 +246,7 @@ class GenericToTimeline:
         self.logger.critical("Reinitialization of chunks")
 
         self.current_chunk = SortedChunk(10000)
-        self.csvWriter = csv.writer(self.current_chunk, delimiter=",", quotechar='"')
+        self.csvWriter = csv.writer(self.current_chunk, delimiter=",", quotechar='"', escapechar="`")
         self.output_files_list = []
         self._setup_next_output_file()
 
@@ -375,7 +375,10 @@ class GenericToTimeline:
         file.
         """
         # sanitize output
-        rows_to_write = [row.replace("\n", "\\n") for row in (date, self.hostname, sourcetype, description, sourcefile)]
+        rows_to_write = [
+            row.replace("\n", "\\n").replace("\r", "\\r")
+            for row in (date, self.hostname, sourcetype, description, sourcefile)
+        ]
         self.csvWriter.writerow(rows_to_write)
         if self.current_chunk.is_full():
             self._flush_chunk_and_new_chunk()
@@ -414,7 +417,7 @@ class GenericToTimeline:
     def add_to_timeline(self) -> int:
         """Create the result file with the result of argument parsing."""
         self.logger.debug("%s started", self.__class__.__name__)
-        self.csvWriter = csv.writer(self.current_chunk, delimiter=",", quotechar='"')
+        self.csvWriter = csv.writer(self.current_chunk, delimiter=",", quotechar='"', escapechar="`")
         self._setup_next_output_file()
         self._deflate_archives()
         self._filter_files_based_on_first_bytes()
