@@ -169,3 +169,80 @@ Output example:
 2021-02-12 15:56:32.512,FAKEMACHINE,Event,Microsoft-Windows-Servicing:4 S-1-5-18 (KBWUClient-SelfUpdate-Aux Installed 0x0 WindowsUpdateAgent),\Windows\System32\winevt\Logs\Setup.evtx
 2022-10-24 01:46:29.681,FAKEMACHINE,Event,Microsoft-Windows-Servicing:2 S-1-5-18 (KBWUClient-SelfUpdate-Aux Installed 0x0 WindowsUpdateAgent),\Windows\System32\winevt\Logs\Setup.evtx
 ```
+
+### FirefoxHistoryToTimeline plugin
+
+This plugin processes Firefox history file by extracting information from `moz_places` and `moz_historyvisits` tables to create relevant events.
+
+Configuration snippet:
+```
+  - FirefoxHistoryToTimeline:
+      archives: ["Browsers", "General", "Offline"]
+      sub_archives: ["Browsers_history.7z", "GetBrowsers_History.7z", "Browsers_complet.7z"]
+      match_pattern: ".*places\\.sqlite.*data$"
+      sourcetype: "FirefoxHistory"
+```
+
+Output example:
+```
+2024-11-12 13:19:37.932,FAKEMACHINE,FirefoxHistory,Url: https://www.mozilla.org/privacy/firefox/ - Title: None - Count: 1 - Typed: 0 - Referer: None,\Users\prestataire\AppData\Roaming\Mozilla\Firefox\Profiles\4hleai00.dev-edition-default\places.sqlite
+2024-11-12 13:19:37.952,FAKEMACHINE,FirefoxHistory,Url: https://www.mozilla.org/fr/privacy/firefox/ - Title: Firefox - Politique de confidentialité — Mozilla - Count: 1 - Typed: 0 - Referer: https://www.mozilla.org/privacy/firefox/,\Users\prestataire\AppData\Roaming\Mozilla\Firefox\Profiles\4hleai00.dev-edition-default\places.sqlite
+```
+
+### RecycleBinToTimeline
+
+This plugin relies on files that are located in RecycleBin directory, since these files are small, they are collected as resisdent files, They contains useful metadatas about the deleted items.
+
+Configuration snippet:
+```
+  - RecycleBinToTimeline:
+      archives: ["General"]
+      sub_archives: ["Residents.7z"]
+      match_pattern: "(.*fichiers_residents/.*_\\$I.*data$)"
+      sourcetype: "RecycleBin"
+```
+
+Output example:
+```
+2024-05-06 15:56:56.626,FAKEMACHINE,RecycleBin,Deletion of file C:\Users\Admin\Downloads\prd-testzip-W7.zip - Filesize : 572,\$Recycle.Bin\S-1-5-21-2533359573-307034746-4050449962-1001\$ILX8009.zip
+```
+
+### UserAssistToTimeline
+
+This plugin parses UserAssist registry keys from user hives to extract information about executables that have been run on the system.
+
+Configuration snippet:
+```
+  - UserAssistToTimeline:
+      archives: ["Detail", "Offline"]
+      sub_archives: ["UserHives.7z"]
+      match_pattern: ".*NTUSER\\.DAT.*"
+      sourcetype: "UserAssist"
+```
+
+Output example:
+```
+2019-09-02 16:06:16.285,FAKEMACHINE,UserAssist,ExecPath: Microsoft.Windows.Explorer - RunCount: 2 - FocusTime: 20986 - RegistryTimestamp: 2019-09-05 17:31:35.056,\Users\Admin\NTUSER.DAT
+2019-09-05 17:31:21.077,FAKEMACHINE,UserAssist,ExecPath: C:\Windows\System32\cmd.exe - RunCount: 2 - FocusTime: 140 - RegistryTimestamp: 2019-09-05 17:31:35.056,\Users\Admin\NTUSER.DAT
+```
+
+### AmCacheToTimeline
+
+This plugin parses `AmCache.hve` hives to extract useful information about installed programs and drivers.
+
+Configuration snippet:
+```
+  - AmCacheToTimeline:
+      archives: ["Little", "Detail", "Offline"]
+      sub_archives: ["SystemHives_little.7z", "SystemHives.7z"]
+      match_pattern: ".*AmCache.hve.*data$"
+      sourcetype: "AmCache"
+```
+
+Output example:
+```
+2019-01-08 12:20:14.000,FAKEMACHINE,AmCache,Installation time - KeyPath: \Root\Programs\0000b599e632970468f205d794760cf82dc70000ffff - Name: Microsoft Visual C++ 2017 Redistributable (x86) -
+ 14.12.25810 - Version: 14.12.25810.0 - Publisher: Microsoft Corporation,\Windows\appcompat\Programs\Amcache.hve
+2019-12-07 09:52:17.000,FAKEMACHINE,AmCache,Driver Last Write time - KeyPath: \Root\InventoryDriverBinary\c:/windows/system32/drivers/wpdupfltr.sys - Name: wpdupfltr.sys - SHA1: 3445834e133a4bc386a15ff42dd4566bda3ad10a - FileSize: 57344,\Windows\appcompat\Programs\Amcache.hve
+```
+

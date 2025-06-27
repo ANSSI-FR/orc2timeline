@@ -47,17 +47,15 @@ If you want to know or edit the dependencies, they can be found in `pyproject.to
 ```
 [...]
 
-dependencies = [  # Duplicate in pre-commit-config.yaml
+dependencies = [
   "click>=8.1.0",
-  "dateparser==1.2.0",
-  "py7zr==0.21.0",
-  "libevtx-python==20240204",
+  "dateparser==1.2.1",
+  "py7zr==0.22.0",
+  "libevtx-python==20240504",
   "libesedb-python==20240420",
   "dfwinreg==20240229",
-  "six==1.16.0",
-  "python-registry==1.3.1",
-  "pytz==2024.1",
-  "pyyaml==6.0.1",
+  "six==1.17.0",
+  "pytz==2025.2",
 ]
 
 [...]
