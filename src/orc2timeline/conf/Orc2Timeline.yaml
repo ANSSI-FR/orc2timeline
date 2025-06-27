@@ -46,3 +46,9 @@ Plugins:
       sub_archives: ["UserHives.7z"]
       match_pattern: ".*NTUSER\\.DAT.*"
       sourcetype: "UserAssist"
+
+  - AmCacheToTimeline:
+      archives: ["Little", "Detail", "Offline"]
+      sub_archives: ["SystemHives_little.7z", "SystemHives.7z"]
+      match_pattern: ".*AmCache.hve.*data$"
+      sourcetype: "AmCache"
